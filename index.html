@@ -893,11 +893,91 @@
       color: rgba(245,239,232,0.55);
     }
 
+    /* ── Hamburger Menu ──────────────────────────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--white);
+      transition: background 0.3s, transform 0.35s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+    nav.scrolled .hamburger span { background: var(--leather); }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--leather);
+      z-index: 150;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: clamp(28px, 7vw, 44px);
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: rgba(245,239,232,0.75);
+      text-decoration: none;
+      padding: 10px 0;
+      transition: color 0.25s;
+    }
+    .mobile-menu a:hover { color: var(--white); }
+    .mobile-menu-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      padding: 8px;
+    }
+    .mobile-menu-footer {
+      position: absolute;
+      bottom: 36px;
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(163,146,134,0.35);
+    }
+
     /* ── Responsive ───────────────────────────────────────────────────────── */
     @media (max-width: 1024px) {
       nav { padding: 20px 32px; }
       nav.scrolled { padding: 14px 32px; }
       section, #shift { padding: 80px 32px; }
+      #stats { padding: 80px 32px; }
       .stats-grid { grid-template-columns: repeat(3, 1fr); }
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -910,22 +990,111 @@
       .shift-urgency { padding: 52px 44px; }
       .vendor-callout { grid-template-columns: 1fr; }
     }
+
     @media (max-width: 768px) {
-      .hero-stats { grid-template-columns: repeat(2, 1fr); }
-      .services-grid { grid-template-columns: 1fr; }
-      .clients-grid { grid-template-columns: 1fr; }
-      .process-strip { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr 1fr; }
+      /* Nav */
       .nav-links { display: none; }
-      .clients-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+
+      /* Sections */
+      section, #shift { padding: 64px 24px; }
+      #stats { padding: 64px 24px; }
+
+      /* Hero */
+      .hero-subtitle br { display: none; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .hero-cta-group { flex-direction: column; align-items: center; }
+      .hero-cta-group .btn-primary,
+      .hero-cta-group .btn-ghost { width: 100%; max-width: 320px; text-align: center; }
+
+      /* Growth banner */
+      #growth-banner { padding: 48px 24px !important; }
+      .growth-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .growth-divider { display: none !important; }
+
+      /* Stats */
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .viral-callout { flex-direction: column; gap: 20px; padding: 32px 24px; }
+
+      /* Services */
+      .services-grid { grid-template-columns: 1fr; }
+
+      /* Clients */
+      .clients-grid { grid-template-columns: 1fr; }
+      .clients-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .process-strip { grid-template-columns: 1fr; }
+
+      /* Why */
+      .why-grid { grid-template-columns: 1fr 1fr; }
+
+      /* Contact */
+      .contact-left, .contact-right { padding: 60px 28px; }
+
+      /* Footer */
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+        padding: 36px 24px;
+      }
+      .footer-socials { flex-wrap: wrap; justify-content: center; gap: 16px; }
+
+      /* Shift */
       .shift-data-grid { grid-template-columns: 1fr 1fr; }
       .shift-pillars { grid-template-columns: 1fr; }
-      .shift-urgency { padding: 48px 28px; }
+      .shift-urgency { padding: 48px 24px; }
+      .shift-manifesto { padding: 40px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      /* Nav */
+      nav { padding: 18px 20px; }
+      nav.scrolled { padding: 12px 20px; }
+
+      /* Sections */
+      section, #shift { padding: 52px 20px; }
+      #stats { padding: 52px 20px; }
+
+      /* Hero */
+      .hero-stat { padding: 20px 12px; }
+      .hero-stat-num { font-size: 26px; }
+      .hero-cta-group .btn-primary,
+      .hero-cta-group .btn-ghost { max-width: 100%; }
+
+      /* Stats — keep 2-col on phones, but stack the shift data */
+      .shift-data-grid { grid-template-columns: 1fr; }
+
+      /* Why — single column */
+      .why-grid { grid-template-columns: 1fr; }
+
+      /* Service cards */
+      .service-card { padding: 36px 28px; }
+
+      /* Contact */
+      .contact-left, .contact-right { padding: 48px 20px; }
+      .contact-item { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .contact-item-value { font-size: 15px; }
+
+      /* Callouts */
+      .viral-callout-num { font-size: 40px; }
+      .vendor-callout-left, .vendor-callout-right { padding: 40px 28px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ── MOBILE MENU ────────────────────────────────────────────────────── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <button class="mobile-menu-close" id="menuClose" aria-label="Close menu">CLOSE ✕</button>
+    <a href="#stats" class="menu-link">Results</a>
+    <a href="#services" class="menu-link">Services</a>
+    <a href="#clients" class="menu-link">Work</a>
+    <a href="#shift" class="menu-link">The Social Shift</a>
+    <a href="#contact" class="menu-link">Contact</a>
+    <a href="https://viral-vows.com" target="_blank" rel="noopener" class="menu-link">Website ↗</a>
+    <span class="mobile-menu-footer">VIRAL VOWS CO.</span>
+  </div>
 
   <!-- ── NAV ──────────────────────────────────────────────────────────────── -->
   <nav id="navbar">
@@ -938,6 +1107,11 @@
       <li><a href="#contact">Contact</a></li>
       <li><a href="https://viral-vows.com" target="_blank" rel="noopener" style="border: 1px solid rgba(255,255,255,0.3); padding: 6px 16px; transition: border-color 0.3s;">Website ↗</a></li>
     </ul>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
 
   <!-- ── HERO ─────────────────────────────────────────────────────────────── -->
@@ -1009,7 +1183,7 @@
     </div>
 
     <!-- Three columns -->
-    <div style="
+    <div class="growth-grid" style="
       display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr;
       align-items: center; position: relative; z-index: 1;
     ">
@@ -1038,7 +1212,7 @@
       </div>
 
       <!-- Divider -->
-      <div style="width: 1px; height: 120px; background: rgba(197,184,166,0.15);"></div>
+      <div class="growth-divider" style="width: 1px; height: 120px; background: rgba(197,184,166,0.15);"></div>
 
       <!-- Column 2: Middle -->
       <div style="text-align: center; padding: 0 48px;">
@@ -1062,7 +1236,7 @@
       </div>
 
       <!-- Divider -->
-      <div style="width: 1px; height: 120px; background: rgba(197,184,166,0.15);"></div>
+      <div class="growth-divider" style="width: 1px; height: 120px; background: rgba(197,184,166,0.15);"></div>
 
       <!-- Column 3: Result -->
       <div style="text-align: center; padding: 0 48px;">
@@ -1604,6 +1778,34 @@
   </footer>
 
   <script>
+    // ── Hamburger / Mobile Menu ─────────────────────────────────────────────
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu   = document.getElementById('mobileMenu');
+    const menuClose    = document.getElementById('menuClose');
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      hamburgerBtn.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    hamburgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    menuClose.addEventListener('click', closeMenu);
+
+    // Close menu when a nav link is tapped
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
     // ── Nav scroll effect ───────────────────────────────────────────────────
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
