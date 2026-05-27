@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viral Vows Co. — Wedding & Event Content Creation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:   #FFFFFF;
+      --pearl:   #f5efe8;   /* lightest cream   — primary bg          */
+      --linen:   #efe6dc;   /* soft linen       — alternate sections  */
+      --sand:    #d8c7b7;   /* warm sand        — borders, mid tones  */
+      --taupe:   #a39286;   /* rose taupe       — labels, secondary   */
+      --cacao:   #7a6156;   /* warm cocoa       — accent only         */
+      --leather: #311c14;   /* deep espresso    — primary dark        */
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--pearl);
+      color: var(--leather);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 60px;
+      background: transparent;
+      transition: background 0.4s ease, padding 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(245,239,232,0.96);
+      backdrop-filter: blur(12px);
+      padding: 16px 60px;
+      border-bottom: 1px solid var(--sand);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+    nav.scrolled .nav-logo { color: var(--leather); }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    nav.scrolled .nav-links a { color: var(--taupe); }
+    nav.scrolled .nav-links a:hover { color: var(--cacao); }
+
+    /* ── Hero ─────────────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--leather);
+      overflow: hidden;
+    }
+
+    /* Texture overlay */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(122,97,86,0.6) 0%, transparent 70%),
+        linear-gradient(180deg, rgba(49,28,20,0.3) 0%, rgba(49,28,20,0.7) 100%);
+      z-index: 1;
+    }
+
+    /* Animated grain texture */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      width: 200%; height: 200%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    /* Large decorative background text */
+    .hero-bg-text {
+      position: absolute;
+      font-family: var(--serif);
+      font-size: clamp(120px, 20vw, 260px);
+      font-weight: 300;
+      letter-spacing: -4px;
+      color: rgba(163,146,134,0.07);
+      line-height: 1;
+      user-select: none;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 880px;
+      padding: 0 40px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(56px, 9vw, 108px);
+      font-weight: 300;
+      line-height: 0.95;
+      color: var(--white);
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--taupe);
+    }
+
+    .hero-subtitle {
+      font-family: var(--serif);
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(245,239,232,0.65);
+      margin: 28px 0 48px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 44px;
+      background: var(--leather);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--cacao); transform: translateY(-2px); }
+
+    .btn-ghost {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 17px 44px;
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover {
+      border-color: var(--taupe);
+      color: var(--taupe);
+      transform: translateY(-2px);
+    }
+
+    /* Hero stat ticker */
+    .hero-stats {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(163,146,134,0.25);
+    }
+    .hero-stat {
+      padding: 28px 20px;
+      text-align: center;
+      border-right: 1px solid rgba(163,146,134,0.2);
+      background: rgba(49,28,20,0.6);
+      backdrop-filter: blur(8px);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-top: 6px;
+    }
+
+    /* ── Section Shared ───────────────────────────────────────────────────── */
+    section { padding: 110px 60px; }
+
+    .section-eyebrow {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--leather);
+      letter-spacing: -0.5px;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--taupe);
+    }
+    .section-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--cacao);   /* accent — used sparingly */
+      margin: 28px 0;
+    }
+    .section-body {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--leather);
+      max-width: 560px;
+      opacity: 0.85;
+    }
+
+    /* ── Stats Section ────────────────────────────────────────────────────── */
+    #stats {
+      background: var(--leather);
+      padding: 100px 60px;
+    }
+
+    .stats-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .stats-header .section-eyebrow { color: var(--taupe); }
+    .stats-header .section-title { color: var(--white); }
+    .stats-header .section-divider { margin: 28px auto; background: var(--taupe); }
+
+    .platform-block { margin-bottom: 64px; }
+    .platform-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .platform-name {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+    .platform-followers {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-style: italic;
+      color: rgba(163,146,134,0.6);
+    }
+    .platform-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(163,146,134,0.2);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.03);
+      padding: 36px 24px;
+      border: 1px solid rgba(163,146,134,0.12);
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .stat-card:hover {
+      background: rgba(163,146,134,0.08);
+      border-color: rgba(163,146,134,0.3);
+      transform: translateY(-4px);
+    }
+    .stat-number {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-name {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 8px;
+    }
+    .stat-growth {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(163,146,134,0.55);
+    }
+
+    .viral-callout {
+      margin-top: 60px;
+      padding: 48px 60px;
+      background: rgba(163,146,134,0.08);
+      border: 1px solid rgba(163,146,134,0.2);
+      border-left: 3px solid var(--taupe);
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+    .viral-callout-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      white-space: nowrap;
+    }
+    .viral-callout-num {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 300;
+      color: var(--white);
+      white-space: nowrap;
+    }
+    .viral-callout-desc {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(245,239,232,0.6);
+      line-height: 1.8;
+    }
+
+    /* ── About Section ────────────────────────────────────────────────────── */
+    #about {
+      background: var(--pearl);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+    .about-quote {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.2;
+      color: var(--leather);
+      position: relative;
+      padding-left: 32px;
+    }
+    .about-quote::before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -10px;
+      font-family: var(--serif);
+      font-size: 80px;
+      color: var(--sand);
+      line-height: 1;
+    }
+
+    /* ── Services Section ─────────────────────────────────────────────────── */
+    #services { background: var(--linen); }
+
+    .services-header {
+      max-width: 540px;
+      margin-bottom: 72px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .service-card {
+      background: var(--white);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease, transform 0.3s ease;
+      cursor: default;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--cacao);   /* accent thread */
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover { background: var(--pearl); transform: translateY(-6px); }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .service-num {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 300;
+      color: var(--sand);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .service-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--leather);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .service-desc {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--taupe);
+    }
+
+    /* ── Clients Section ──────────────────────────────────────────────────── */
+    #clients { background: var(--pearl); }
+
+    .clients-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 72px;
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-bottom: 72px;
+    }
+    .client-card {
+      background: var(--white);
+      padding: 52px 48px;
+      border: 1px solid transparent;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .client-card:hover {
+      border-color: var(--sand);
+      transform: translateY(-4px);
+    }
+    .client-type {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 14px;
+    }
+    .client-name {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--leather);
+      margin-bottom: 20px;
+    }
+    .client-desc {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--taupe);
+    }
+    .client-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--sand);
+      margin: 24px 0;
+    }
+
+    /* Process strip */
+    .process-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--leather);
+    }
+    .process-step {
+      padding: 52px 48px;
+      border-right: 1px solid rgba(245,239,232,0.1);
+    }
+    .process-step:last-child { border-right: none; }
+    .process-step-num {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(163,146,134,0.3);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .process-step-title {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 14px;
+    }
+    .process-step-desc {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(245,239,232,0.55);
+    }
+
+    /* ── Why Viral Vows ───────────────────────────────────────────────────── */
+    #why {
+      background: var(--leather);
+      text-align: center;
+    }
+    #why .section-title { color: var(--white); }
+    #why .section-eyebrow { color: var(--taupe); }
+    #why .section-divider { margin: 28px auto; background: var(--taupe); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 72px;
+    }
+    .why-item {
+      padding: 0 16px;
+    }
+    .why-icon {
+      font-family: var(--serif);
+      font-size: 40px;
+      color: var(--taupe);
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+    .why-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .why-desc {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(163,146,134,0.7);
+    }
+
+    /* ── CTA Section ──────────────────────────────────────────────────────── */
+    #contact {
+      background: var(--pearl);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+    }
+    .contact-left {
+      background: var(--leather);
+      padding: 110px 72px;
+    }
+    .contact-left .section-title { color: var(--white); font-size: clamp(36px, 4.5vw, 60px); }
+    .contact-left .section-eyebrow { color: var(--taupe); }
+    .contact-left .section-divider { background: rgba(163,146,134,0.4); }
+    .contact-left .section-body { color: rgba(245,239,232,0.65); max-width: 420px; }
+
+    .contact-right {
+      background: var(--white);
+      padding: 110px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--sand);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .contact-item:first-child { border-top: 1px solid var(--sand); }
+    .contact-item-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+    .contact-item-value {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--leather);
+    }
+
+    .contact-cta-wrap { margin-top: 48px; }
+    .contact-cta-wrap .btn-primary { width: 100%; text-align: center; padding: 22px; }
+
+    /* ── Footer ───────────────────────────────────────────────────────────── */
+    footer {
+      background: var(--leather);
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(163,146,134,0.15);
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: var(--taupe);
+    }
+    .footer-copy {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      color: rgba(163,146,134,0.4);
+    }
+    .footer-socials {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-socials span {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(163,146,134,0.5);
+    }
+
+    /* ── Reveal Animation ─────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ── Counter animation ────────────────────────────────────────────────── */
+    .count-up { display: inline-block; }
+
+    /* ── Social Shift Section ─────────────────────────────────────────────── */
+    #shift { background: var(--pearl); padding: 110px 60px; }
+    .shift-header { max-width: 700px; margin: 0 auto 80px; text-align: center; }
+    .shift-manifesto {
+      background: var(--leather);
+      padding: 72px 80px;
+      margin-bottom: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .shift-manifesto::before {
+      content: '"';
+      position: absolute;
+      top: -20px; left: 48px;
+      font-family: var(--serif);
+      font-size: 240px;
+      color: rgba(163,146,134,0.07);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .shift-manifesto-text {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.8vw, 34px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.6;
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .shift-manifesto-text em { color: var(--taupe); font-style: normal; }
+    .shift-data-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-bottom: 72px;
+    }
+    .shift-data-card {
+      background: var(--white);
+      padding: 48px 32px;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .shift-data-card:hover { border-color: var(--cacao); transform: translateY(-4px); }
+    .shift-data-num {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 400;
+      color: var(--leather);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .shift-data-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 10px;
+    }
+    .shift-data-desc {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--taupe);
+      opacity: 0.9;
+    }
+    .shift-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 2px;
+    }
+    .shift-pillar {
+      background: var(--leather);
+      padding: 56px 44px;
+    }
+    .shift-pillar-icon {
+      font-family: var(--serif);
+      font-size: 40px;
+      color: rgba(163,146,134,0.35);
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+    .shift-pillar-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .shift-pillar-sub {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 14px;
+    }
+    .shift-pillar-desc {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(245,239,232,0.5);
+    }
+    .shift-urgency {
+      background: var(--linen);
+      padding: 64px 80px;
+      text-align: center;
+    }
+    .shift-urgency-headline {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 300;
+      color: var(--leather);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .shift-urgency-headline em { font-style: italic; color: var(--taupe); }
+    .shift-urgency-sub {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--leather);
+      max-width: 580px;
+      margin: 0 auto 36px;
+      opacity: 0.8;
+    }
+    /* ── Vendor callout ────────────────────────────────────────────────────── */
+    .vendor-callout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 72px;
+    }
+    .vendor-callout-left { background: var(--leather); padding: 52px 56px; }
+    .vendor-callout-right { background: var(--leather); padding: 52px 56px; border-left: 3px solid var(--cacao); }
+    .vendor-stat {
+      font-family: var(--serif);
+      font-size: 64px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .vendor-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 14px;
+    }
+    .vendor-desc {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(245,239,232,0.55);
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      nav { padding: 20px 32px; }
+      nav.scrolled { padding: 14px 32px; }
+      section, #shift { padding: 80px 32px; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      #about { grid-template-columns: 1fr; gap: 48px; }
+      #contact { grid-template-columns: 1fr; }
+      .contact-left, .contact-right { padding: 80px 40px; }
+      .viral-callout { flex-direction: column; gap: 24px; padding: 36px 32px; }
+      .shift-data-grid { grid-template-columns: repeat(2, 1fr); }
+      .shift-manifesto { padding: 52px 44px; }
+      .shift-urgency { padding: 52px 44px; }
+      .vendor-callout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .clients-grid { grid-template-columns: 1fr; }
+      .process-strip { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .clients-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .shift-data-grid { grid-template-columns: 1fr 1fr; }
+      .shift-pillars { grid-template-columns: 1fr; }
+      .shift-urgency { padding: 48px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────────────────────────── -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">VIRAL VOWS CO.</a>
+    <ul class="nav-links">
+      <li><a href="#stats">Results</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#clients">Work</a></li>
+      <li><a href="#shift">The Social Shift</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://viral-vows.com" target="_blank" rel="noopener" style="border: 1px solid rgba(255,255,255,0.3); padding: 6px 16px; transition: border-color 0.3s;">Website ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-bg-text">VIRAL VOWS CO.</div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Wedding &amp; Event Content Creation</p>
+      <h1 class="hero-title">
+        Content That<br><em>Goes Viral.</em>
+      </h1>
+      <p class="hero-subtitle">
+        Your competitors are already investing in social. The question is<br>whether your content is doing the same work — or none at all.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#contact" class="btn-primary">Work With Me</a>
+        <a href="#stats" class="btn-ghost">View Results</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">10M+</div>
+        <div class="hero-stat-label">Total Views</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5M+</div>
+        <div class="hero-stat-label">Total Reach</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">10K+</div>
+        <div class="hero-stat-label">Followers</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4 Mo.</div>
+        <div class="hero-stat-label">Jan – May 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GROWTH STORY BANNER ───────────────────────────────────────────────── -->
+  <div id="growth-banner" style="
+    background: var(--leather);
+    padding: 72px 80px;
+    border-top: 1px solid rgba(197,184,166,0.12);
+    border-bottom: 1px solid rgba(197,184,166,0.12);
+    position: relative;
+    overflow: hidden;
+  ">
+    <!-- Subtle background watermark -->
+    <div style="
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none; overflow: hidden;
+    ">
+      <span style="
+        font-family: var(--serif); font-size: 220px; font-weight: 300;
+        color: rgba(197,184,166,0.04); letter-spacing: -4px; white-space: nowrap;
+        user-select: none;
+      ">THE GROWTH</span>
+    </div>
+
+    <!-- Eyebrow -->
+    <div style="text-align: center; margin-bottom: 52px; position: relative; z-index: 1;">
+      <span style="
+        font-family: var(--sans); font-size: 9px; font-weight: 600;
+        letter-spacing: 5px; text-transform: uppercase; color: var(--sand);
+        opacity: 0.8;
+      ">January 25 – May 25, 2026 &nbsp;·&nbsp; Zero Paid Ads &nbsp;·&nbsp; Pure Content Strategy</span>
+    </div>
+
+    <!-- Three columns -->
+    <div style="
+      display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr;
+      align-items: center; position: relative; z-index: 1;
+    ">
+
+      <!-- Column 1: Start -->
+      <div style="text-align: center; padding: 0 48px;">
+        <div style="
+          font-family: var(--sans); font-size: 9px; font-weight: 500;
+          letter-spacing: 3px; text-transform: uppercase;
+          color: rgba(197,184,166,0.4); margin-bottom: 20px;
+        ">Where It Started</div>
+        <div style="
+          font-family: var(--serif); font-size: clamp(56px, 7vw, 88px);
+          font-weight: 300; color: rgba(245,239,232,0.25); line-height: 1;
+          letter-spacing: -2px;
+        ">&lt;300</div>
+        <div style="
+          width: 32px; height: 1px; background: rgba(197,184,166,0.25);
+          margin: 20px auto;
+        "></div>
+        <div style="
+          font-family: var(--sans); font-size: 10px; font-weight: 300;
+          letter-spacing: 2px; text-transform: uppercase;
+          color: rgba(197,184,166,0.45);
+        ">Followers Across<br>All Platforms</div>
+      </div>
+
+      <!-- Divider -->
+      <div style="width: 1px; height: 120px; background: rgba(197,184,166,0.15);"></div>
+
+      <!-- Column 2: Middle -->
+      <div style="text-align: center; padding: 0 48px;">
+        <div style="
+          font-family: var(--sans); font-size: 9px; font-weight: 500;
+          letter-spacing: 3px; text-transform: uppercase;
+          color: rgba(197,184,166,0.4); margin-bottom: 20px;
+        ">The Window</div>
+        <div style="
+          font-family: var(--serif); font-size: clamp(56px, 7vw, 88px);
+          font-weight: 300; color: var(--white); line-height: 1;
+        ">4</div>
+        <div style="
+          width: 32px; height: 1px; background: rgba(197,184,166,0.35);
+          margin: 20px auto;
+        "></div>
+        <div style="
+          font-family: var(--serif); font-size: 15px; font-style: italic;
+          font-weight: 300; color: rgba(197,184,166,0.55); line-height: 1.7;
+        ">Months of content.<br>A community built from nothing.</div>
+      </div>
+
+      <!-- Divider -->
+      <div style="width: 1px; height: 120px; background: rgba(197,184,166,0.15);"></div>
+
+      <!-- Column 3: Result -->
+      <div style="text-align: center; padding: 0 48px;">
+        <div style="
+          font-family: var(--sans); font-size: 9px; font-weight: 500;
+          letter-spacing: 3px; text-transform: uppercase;
+          color: rgba(197,184,166,0.4); margin-bottom: 20px;
+        ">Where It Stands</div>
+        <div style="
+          font-family: var(--serif); font-size: clamp(56px, 7vw, 88px);
+          font-weight: 300; color: var(--white); line-height: 1;
+          letter-spacing: -2px;
+        ">10K+</div>
+        <div style="
+          width: 32px; height: 1px; background: rgba(197,184,166,0.35);
+          margin: 20px auto;
+        "></div>
+        <div style="
+          font-family: var(--sans); font-size: 10px; font-weight: 300;
+          letter-spacing: 2px; text-transform: uppercase;
+          color: rgba(197,184,166,0.55);
+        ">Followers &amp; Over<br>10 Million Views</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── ABOUT ─────────────────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="reveal">
+      <span class="section-eyebrow">The Vision</span>
+      <h2 class="section-title">Every event<br>deserves content that<br><em>lives beyond the day.</em></h2>
+      <div class="section-divider"></div>
+      <p class="section-body">
+        In just 4 months — January to May 2026 — Viral Vows grew from under 300 followers across all platforms to 10,000+, accumulating over 10 million views through content alone. No paid ads. No shortcuts. Just a deep understanding of what moves people online.
+      </p>
+      <br>
+      <p class="section-body">
+        Viral Vows is led by Sadé — a BBA Marketing graduate from Temple University with 6+ years of hands-on marketing and social media experience. As a Gen Z creator, I understand these platforms from the inside out: the trends, the algorithms, the psychology of what makes an audience stop, watch, and take action.
+      </p>
+      <br>
+      <p class="section-body" style="font-style: italic; color: var(--taupe);">
+        Social success goes far beyond follower count. Engagement and community are where real value lives — where audiences become clients, content becomes credibility, and visibility becomes revenue.
+      </p>
+      <br>
+      <a href="#contact" class="btn-primary" style="margin-top: 20px; display: inline-block;">Let's Talk</a>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <p class="about-quote">
+        Followers are a number. Community is a business asset.
+      </p>
+      <div style="margin-top: 48px; padding: 36px 0; border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand);">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span style="font-family: var(--serif); font-size: 13px; color: var(--taupe); white-space: nowrap; font-weight: 500; letter-spacing: 1px;">BBA, Marketing</span>
+            <div style="flex:1; height:1px; background: var(--sand);"></div>
+            <span style="font-family: var(--sans); font-size: 10px; color: var(--taupe); letter-spacing: 2px; text-transform: uppercase;">Temple University</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span style="font-family: var(--serif); font-size: 13px; color: var(--taupe); white-space: nowrap; font-weight: 500; letter-spacing: 1px;">6+ Years Experience</span>
+            <div style="flex:1; height:1px; background: var(--sand);"></div>
+            <span style="font-family: var(--sans); font-size: 10px; color: var(--taupe); letter-spacing: 2px; text-transform: uppercase;">Marketing &amp; Social Media</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span style="font-family: var(--serif); font-size: 13px; color: var(--taupe); white-space: nowrap; font-weight: 500; letter-spacing: 1px;">Meta Monetized</span>
+            <div style="flex:1; height:1px; background: var(--sand);"></div>
+            <span style="font-family: var(--sans); font-size: 10px; color: var(--taupe); letter-spacing: 2px; text-transform: uppercase;">Instagram &amp; Facebook</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS ─────────────────────────────────────────────────────────────── -->
+  <section id="stats">
+    <div class="stats-header reveal">
+      <span class="section-eyebrow">Proven Performance</span>
+      <h2 class="section-title" style="color: var(--white);">The Numbers<br><em style="color: var(--taupe);">Speak for Themselves</em></h2>
+      <div class="section-divider" style="margin: 28px auto; background: var(--taupe);"></div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="platform-block reveal">
+      <div class="platform-label">
+        <span class="platform-name">Instagram</span>
+        <span class="platform-followers">1,484 followers</span>
+        <div class="platform-line"></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">4.1M</div>
+          <div class="stat-name">Views</div>
+          <div class="stat-growth">↑ +2,900%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2.8M</div>
+          <div class="stat-name">Reach</div>
+          <div class="stat-growth">↑ +4,200%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">225K</div>
+          <div class="stat-name">Interactions</div>
+          <div class="stat-growth">↑ +3,000%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">836</div>
+          <div class="stat-name">New Follows</div>
+          <div class="stat-growth">↑ +770.8%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5.1K</div>
+          <div class="stat-name">Profile Visits</div>
+          <div class="stat-growth">↑ +293.8%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Facebook -->
+    <div class="platform-block reveal">
+      <div class="platform-label">
+        <span class="platform-name">Facebook</span>
+        <span class="platform-followers">5,500 followers</span>
+        <div class="platform-line"></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">3.2M</div>
+          <div class="stat-name">Views</div>
+          <div class="stat-growth">↑ +66,400%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2.1M</div>
+          <div class="stat-name">Viewers</div>
+          <div class="stat-growth">↑ +56,100%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">103.2K</div>
+          <div class="stat-name">Interactions</div>
+          <div class="stat-growth">↑ +210,600%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4.9K</div>
+          <div class="stat-name">New Follows</div>
+          <div class="stat-growth">↑ +491.2%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">7.1K</div>
+          <div class="stat-name">Page Visits</div>
+          <div class="stat-growth">↑ +33,900%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TikTok -->
+    <div class="platform-block reveal">
+      <div class="platform-label">
+        <span class="platform-name">TikTok</span>
+        <span class="platform-followers">6,000 followers</span>
+        <div class="platform-line"></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">303K</div>
+          <div class="stat-name">Post Views</div>
+          <div class="stat-growth">↑ +406.1%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">43K</div>
+          <div class="stat-name">Likes</div>
+          <div class="stat-growth">↑ +2,395.8%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4,596</div>
+          <div class="stat-name">Shares</div>
+          <div class="stat-growth">↑ +4,638.1%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">93.9%</div>
+          <div class="stat-name">FYP Traffic</div>
+          <div class="stat-growth">For You Page</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3,877</div>
+          <div class="stat-name">Profile Views</div>
+          <div class="stat-growth">↑ +1,040.3%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Viral Callout -->
+    <div class="viral-callout reveal">
+      <span class="viral-callout-label">Viral<br>Moment</span>
+      <div class="viral-callout-num">6.6M</div>
+      <p class="viral-callout-desc">
+        A single piece of content reached 6.6 million views across TikTok and Instagram alone. With multiple videos surpassing 200K+ reached on both platforms, this is what happens when the right content meets the right strategy — organic reach that paid ads simply can't replicate.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ────────────────────────────────────────────────────────────── -->
+  <section id="services">
+    <div class="services-header reveal">
+      <span class="section-eyebrow">What I Offer</span>
+      <h2 class="section-title">Services Built<br>for <em>Results</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">01</div>
+        <h3 class="service-title">Day-of Event Coverage</h3>
+        <p class="service-desc">Real-time photo and video capture throughout your event. Unobtrusive, professional, and delivered social-ready — same day or within 24 hours.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">02</div>
+        <h3 class="service-title">Social-Ready Video</h3>
+        <p class="service-desc">Professionally edited short-form video content optimized for TikTok, Instagram Reels, Facebook, and YouTube Shorts. Designed to stop the scroll.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-num">03</div>
+        <h3 class="service-title">Social Media Management</h3>
+        <p class="service-desc">Full-service management of your social channels including posting, engagement, analytics review, and ongoing growth strategy.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-num">04</div>
+        <h3 class="service-title">Content Planning</h3>
+        <p class="service-desc">Custom content calendars, post strategies, and creative direction tailored to your brand's goals, audience, and aesthetic.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-5">
+        <div class="service-num">05</div>
+        <h3 class="service-title">Video Conceptualization</h3>
+        <p class="service-desc">Pre-event creative planning to map out the content story, angles, and viral moments before the day even begins.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-5">
+        <div class="service-num">06</div>
+        <h3 class="service-title">Social Strategy</h3>
+        <p class="service-desc">One-on-one strategy sessions to audit your presence, identify growth opportunities, and build a clear roadmap to more reach and engagement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CLIENTS ─────────────────────────────────────────────────────────────── -->
+  <section id="clients">
+    <div class="clients-header">
+      <div class="reveal">
+        <span class="section-eyebrow">Trusted By</span>
+        <h2 class="section-title">Past Work &amp;<br><em>Collaborations</em></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <p style="font-family: var(--sans); font-size: 12px; font-weight: 300; color: var(--taupe); line-height: 1.9; max-width: 340px;">
+          From luxury wedding venues and iconic gardens to global beauty brands, live entertainment artists, and medical aesthetics practices — Viral Vows brings the same strategic, results-driven approach to every partnership.
+        </p>
+      </div>
+    </div>
+
+    <!-- Category label: Weddings & Events -->
+    <div class="reveal" style="margin-bottom: 16px;">
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <span style="font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--taupe); white-space: nowrap;">Weddings &amp; Events</span>
+        <div style="flex: 1; height: 1px; background: var(--sand);"></div>
+      </div>
+    </div>
+
+    <div class="clients-grid" style="margin-bottom: 4px;">
+      <div class="client-card reveal reveal-delay-1">
+        <div class="client-type">Luxury Wedding Venue Group</div>
+        <h3 class="client-name">Cescaphe</h3>
+        <div class="client-divider"></div>
+        <p class="client-desc">Philadelphia's most prestigious wedding venue collection. Social-ready event content that showcased Cescaphe's stunning spaces and elevated their digital presence across platforms.</p>
+      </div>
+      <div class="client-card reveal reveal-delay-2">
+        <div class="client-type">Botanical Garden &amp; Cultural Landmark</div>
+        <h3 class="client-name">Longwood Gardens</h3>
+        <div class="client-divider"></div>
+        <p class="client-desc">Content collaboration with one of the world's premier public gardens and event destinations. Capturing the extraordinary beauty and experience of Longwood Gardens through social-first storytelling.</p>
+      </div>
+      <div class="client-card reveal reveal-delay-3">
+        <div class="client-type">Luxury Live Entertainment</div>
+        <h3 class="client-name">Sax on It</h3>
+        <div class="client-divider"></div>
+        <p class="client-desc">Content creation for a premier luxury saxophonist — capturing the energy, elegance, and live performance magic that defines the brand. Social-first video storytelling built to expand reach and attract high-end event bookings.</p>
+      </div>
+      <div class="client-card reveal reveal-delay-4">
+        <div class="client-type">Event Production</div>
+        <h3 class="client-name">On It Productions</h3>
+        <div class="client-divider"></div>
+        <p class="client-desc">A full-service event production company. High-impact content coverage showcasing their production quality and helping amplify the brand story across social media to drive new business.</p>
+      </div>
+      <div class="client-card reveal reveal-delay-5" style="grid-column: 1 / -1;">
+        <div class="client-type">Wedding Photography</div>
+        <h3 class="client-name">Denise Marie Photography</h3>
+        <div class="client-divider"></div>
+        <p class="client-desc">A celebrated wedding photography studio. Viral Vows collaborated to create complementary video content that paired with their photography — giving couples a complete, deeply shareable event story and expanding Denise Marie's social reach to a new audience.</p>
+      </div>
+    </div>
+
+    <!-- Category label: Corporate & Brands -->
+    <div class="reveal" style="margin: 48px 0 16px;">
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <span style="font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--taupe); white-space: nowrap;">Corporate &amp; Brands</span>
+        <div style="flex: 1; height: 1px; background: var(--sand);"></div>
+      </div>
+    </div>
+
+    <div class="clients-grid">
+      <div class="client-card reveal reveal-delay-1">
+        <div class="client-type">Global Beauty Brand</div>
+        <h3 class="client-name">e.l.f. Cosmetics</h3>
+        <div class="client-divider"></div>
+        <p class="client-desc">Social media content creation for e.l.f.'s Alicia Keys SoulCare line — brand-aligned, trend-forward content crafted to connect with a highly engaged beauty audience across platforms.</p>
+      </div>
+      <div class="client-card reveal reveal-delay-2">
+        <div class="client-type">Global Haircare Brand</div>
+        <h3 class="client-name">Dyson Haircare</h3>
+        <div class="client-divider"></div>
+        <p class="client-desc">Content creation for one of the world's leading premium haircare brands. Visually elevated, social-ready video and photo content designed to showcase the product and drive audience engagement.</p>
+      </div>
+      <div class="client-card reveal reveal-delay-3">
+        <div class="client-type">Medical Aesthetics — Social Media Management</div>
+        <h3 class="client-name">Revive Medical Spa</h3>
+        <div class="client-divider"></div>
+        <p class="client-desc">Full social media management and content creation for a high-end medical spa. Strategy, content planning, and execution designed to attract new clients and build a loyal, engaged community.</p>
+      </div>
+      <div class="client-card reveal reveal-delay-4">
+        <div class="client-type">Medical Aesthetics — Social Media Management</div>
+        <h3 class="client-name">Arla Medical Aesthetics</h3>
+        <div class="client-divider"></div>
+        <p class="client-desc">End-to-end social media management and content creation for a premium medical aesthetics practice. From content planning to video production, built to convert followers into booked appointments.</p>
+      </div>
+    </div>
+
+    <!-- 20+ Vendors callout -->
+    <div class="vendor-callout reveal">
+      <div class="vendor-callout-left">
+        <div class="vendor-stat">20+</div>
+        <div class="vendor-label">Wedding Vendor Collaborations</div>
+        <p class="vendor-desc">Collaborated with over 20 wedding industry vendors directly through the Viral Vows platform — generating new engagement, new business inquiries, and lasting partnerships that extend well beyond a single event.</p>
+      </div>
+      <div class="vendor-callout-right">
+        <div class="vendor-stat" style="font-size: 42px; margin-bottom: 20px; line-height: 1.2;">Community<br>Creates<br><em style="color: var(--taupe); font-style: italic;">Business.</em></div>
+        <p class="vendor-desc">Every collaboration is an amplification. When vendors appear in Viral Vows content, their brand reaches an engaged, relevant audience — turning a single post into new leads, new bookings, and lasting visibility across the wedding and events industry.</p>
+      </div>
+    </div>
+
+    <!-- Process -->
+    <div class="process-strip reveal">
+      <div class="process-step">
+        <div class="process-step-num">01</div>
+        <div class="process-step-title">Before the Event</div>
+        <p class="process-step-desc">A creative strategy call to map out viral moments, angles, and deliverables tailored to your brand and event goals.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">02</div>
+        <div class="process-step-title">Day Of</div>
+        <p class="process-step-desc">Unobtrusive, professional coverage capturing the real emotion, detail, and energy of your event — nothing staged, everything real.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">03</div>
+        <div class="process-step-title">Delivered Fast</div>
+        <p class="process-step-desc">Social-ready edits optimized for each platform, delivered quickly and ready to perform. No waiting weeks for content.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHY VIRAL VOWS ─────────────────────────────────────────────────────── -->
+  <section id="why">
+    <div class="reveal">
+      <span class="section-eyebrow">Why Viral Vows</span>
+      <h2 class="section-title">What Sets the<br><em>Work Apart</em></h2>
+      <div class="section-divider" style="margin: 28px auto;"></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal reveal-delay-1">
+        <div class="why-icon">◇</div>
+        <h3 class="why-title">Proven at Scale</h3>
+        <p class="why-desc">Under 300 followers to 10,000+ in 4 months. Over 10 million views with zero paid ads. A single video hitting 6.6M views. Multiple videos surpassing 200K+ reach. These aren't projections — they're a track record.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <div class="why-icon">◇</div>
+        <h3 class="why-title">Engagement Over Followers</h3>
+        <p class="why-desc">Follower count is just a number. Real value lives in community — the engaged audience that translates directly into new clients, opportunities, and increased revenue for your brand.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-3">
+        <div class="why-icon">◇</div>
+        <h3 class="why-title">Monetization Framework</h3>
+        <p class="why-desc">Qualified to monetize on both Instagram and Facebook, with a single video generating $500+ in revenue. I've built a framework that helps businesses and creators turn their content into income.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-4">
+        <div class="why-icon">◇</div>
+        <h3 class="why-title">Gen Z Insider Edge</h3>
+        <p class="why-desc">As a Gen Z creator with a BBA in Marketing from Temple University, I understand the platforms natively — combining academic strategy with real-world trend analysis, coursework, and 6+ years of execution.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-5">
+        <div class="why-icon">◇</div>
+        <h3 class="why-title">Algorithm Intelligence</h3>
+        <p class="why-desc">93.9% of TikTok content hits the For You Page. Understanding how algorithms distribute content isn't a bonus — it's built into every creative decision from concept to post.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-5">
+        <div class="why-icon">◇</div>
+        <h3 class="why-title">Brand-First, Always</h3>
+        <p class="why-desc">From global brands like Dyson and e.l.f. to local medical spas and luxury venues — every piece of content is built around your identity, your audience, and your goals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE SOCIAL SHIFT ──────────────────────────────────────────────────── -->
+  <section id="shift">
+    <div class="shift-header reveal">
+      <span class="section-eyebrow">The Social Shift</span>
+      <h2 class="section-title" style="font-size: clamp(36px, 5vw, 60px);">Social Media Isn't<br>Optional Anymore.<br><em>It's Infrastructure.</em></h2>
+      <div class="section-divider" style="margin: 28px auto;"></div>
+      <p class="section-body" style="max-width: 560px; margin: 0 auto; text-align: center;">
+        The businesses winning right now aren't necessarily the ones with the biggest budgets. They're the ones with the most trusted, most visible presence online — and that presence is built through content.
+      </p>
+    </div>
+
+    <!-- Manifesto -->
+    <div class="shift-manifesto reveal">
+      <p class="shift-manifesto-text">
+        The question is no longer <em>whether</em> social media matters for your business.<br>
+        The question is whether your content is <em>working hard enough</em> — or handing your audience to someone who knows how to reach them.
+      </p>
+    </div>
+
+    <!-- Data Points -->
+    <div class="shift-data-grid">
+      <div class="shift-data-card reveal reveal-delay-1">
+        <div class="shift-data-num">71%</div>
+        <div class="shift-data-label">Brand Discovery</div>
+        <p class="shift-data-desc">Of consumers now discover new brands through social media — not search engines, not word of mouth, not ads. Social <em>is</em> the new storefront.</p>
+      </div>
+      <div class="shift-data-card reveal reveal-delay-2">
+        <div class="shift-data-num">$8.5T</div>
+        <div class="shift-data-label">Social Commerce by 2030</div>
+        <p class="shift-data-desc">Social commerce is projected to reach $8.5 trillion globally by 2030. The brands building community now will own that revenue later.</p>
+      </div>
+      <div class="shift-data-card reveal reveal-delay-3">
+        <div class="shift-data-num">3×</div>
+        <div class="shift-data-label">Short-Form Video Engagement</div>
+        <p class="shift-data-desc">Short-form video generates 3x more engagement than any other content format. It's the highest-ROI investment a brand can make in social right now.</p>
+      </div>
+      <div class="shift-data-card reveal reveal-delay-4">
+        <div class="shift-data-num">40%</div>
+        <div class="shift-data-label">Gen Z Uses Social as Search</div>
+        <p class="shift-data-desc">40% of Gen Z uses TikTok and Instagram instead of Google to search for businesses, services, and recommendations. If you're not there, you don't exist.</p>
+      </div>
+    </div>
+
+    <!-- Three Pillars -->
+    <div class="shift-pillars">
+      <div class="shift-pillar reveal reveal-delay-1">
+        <div class="shift-pillar-icon">◈</div>
+        <h3 class="shift-pillar-title">Social is the New Search</h3>
+        <div class="shift-pillar-sub">Discovery</div>
+        <p class="shift-pillar-desc">Your next client isn't Googling you first — they're scrolling. A strong, consistent social presence puts your brand directly in front of the people already looking for what you offer. Without it, you're invisible to an entire generation of buyers.</p>
+      </div>
+      <div class="shift-pillar reveal reveal-delay-2">
+        <div class="shift-pillar-icon">◈</div>
+        <h3 class="shift-pillar-title">Community is the New Credibility</h3>
+        <div class="shift-pillar-sub">Trust</div>
+        <p class="shift-pillar-desc">People don't trust brands — they trust people and communities. An engaged audience is the most powerful form of social proof you can have. It tells every potential client: others already believe in this. You should too.</p>
+      </div>
+      <div class="shift-pillar reveal reveal-delay-3">
+        <div class="shift-pillar-icon">◈</div>
+        <h3 class="shift-pillar-title">Engagement is the New Funnel</h3>
+        <div class="shift-pillar-sub">Revenue</div>
+        <p class="shift-pillar-desc">Followers who engage become clients. Clients become referrals. Referrals become revenue. The brands that invest in building real engagement — not just follower counts — are building a sustainable pipeline that compounds over time.</p>
+      </div>
+    </div>
+
+    <!-- Urgency Block -->
+    <div class="shift-urgency reveal">
+      <h3 class="shift-urgency-headline">Every day without <em>strategic social content</em><br>is a day your competitor closes the gap.</h3>
+      <p class="shift-urgency-sub">
+        The brands that win the next decade won't necessarily outspend — they'll out-connect. They'll build communities that trust them, content that reaches millions, and a presence that turns audiences into revenue. That work starts now.
+      </p>
+      <a href="#contact" class="btn-primary">Start Building Today</a>
+    </div>
+  </section>
+
+  <!-- ── CTA / CONTACT ──────────────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="contact-left">
+      <span class="section-eyebrow">Let's Create Together</span>
+      <h2 class="section-title">Ready to Make<br>Something<br><em>Viral?</em></h2>
+      <div class="section-divider"></div>
+      <p class="section-body">
+        Whether you're a luxury wedding venue, a national beauty brand, a medical spa, or a corporate company — if you're serious about social media that drives real results, I'd love to connect.
+      </p>
+      <br>
+      <p class="section-body" style="margin-top: 8px;">
+        Let's build content that goes beyond the event and turns your audience into revenue.
+      </p>
+    </div>
+    <div class="contact-right">
+      <p style="font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--taupe); margin-bottom: 40px;">Get in Touch</p>
+
+      <div class="contact-item">
+        <span class="contact-item-label">Website</span>
+        <a href="https://viral-vows.com" target="_blank" rel="noopener" style="font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--cacao); text-decoration: none;">viral-vows.com ↗</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <span class="contact-item-value">viralvowss@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">TikTok</span>
+        <span class="contact-item-value">@viralvowss</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Instagram</span>
+        <span class="contact-item-value">@viral_vows</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Facebook</span>
+        <span class="contact-item-value">@viral_vows</span>
+      </div>
+
+      <div class="contact-cta-wrap">
+        <a href="mailto:viralvowss@gmail.com" class="btn-primary">Send a Message</a>
+      </div>
+
+      <p style="font-family: var(--sans); font-size: 11px; font-weight: 300; color: var(--taupe); margin-top: 28px; line-height: 1.7;">
+        Available for weddings, corporate brands, medical practices,<br>social media management, and ongoing content partnerships.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+  <footer>
+    <span class="footer-logo">VIRAL VOWS CO.</span>
+    <span class="footer-copy">© 2026 Viral Vows Co. All rights reserved.</span>
+    <div class="footer-socials">
+      <span>TikTok @viralvowss</span>
+      <span>IG @viral_vows</span>
+      <span>FB @viral_vows</span>
+      <a href="https://viral-vows.com" target="_blank" rel="noopener" style="font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(163,146,134,0.6); text-decoration: none;">viral-vows.com ↗</a>
+    </div>
+  </footer>
+
+  <script>
+    // ── Nav scroll effect ───────────────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Reveal on scroll ───────────────────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Smooth stat counter animation ──────────────────────────────────────
+    function animateCount(el, target, suffix, duration) {
+      const start = performance.now();
+      const isDecimal = target % 1 !== 0;
+      const step = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const current = isDecimal
+          ? (target * ease).toFixed(1)
+          : Math.floor(target * ease);
+        el.textContent = current.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    // Hero stat counters
+    const heroStatNums = document.querySelectorAll('.hero-stat-num');
+    const heroData = [
+      { val: 10,  suffix: 'M+' },
+      { val: 5,   suffix: 'M+' },
+      { val: 10,  suffix: 'K+' },
+      { val: 4,   suffix: ' Mo.' },
+    ];
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          heroStatNums.forEach((el, i) => {
+            animateCount(el, heroData[i].val, heroData[i].suffix, 1800);
+          });
+          heroObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    if (heroStatNums[0]) heroObserver.observe(heroStatNums[0].closest('.hero-stats'));
+  </script>
+</body>
+</html>
